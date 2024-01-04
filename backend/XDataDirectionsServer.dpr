@@ -5,7 +5,8 @@ uses
   UServerContainer in 'UServerContainer.pas' {ServerContainer: TDataModule},
   UFrmMain in 'UFrmMain.pas' {FrmMain},
   UDirectionsService in 'services\UDirectionsService.pas',
-  UDirectionsServiceImpl in 'services\UDirectionsServiceImpl.pas';
+  UDirectionsServiceImpl in 'services\UDirectionsServiceImpl.pas',
+  UDirectionsTypes in 'services\UDirectionsTypes.pas';
 
 {$R *.res}
 

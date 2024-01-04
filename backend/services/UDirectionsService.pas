@@ -12,7 +12,7 @@ type
   IDirectionsService = interface(IInvokable)
     ['{4BF57EA8-0300-49F7-A996-99676B596561}']
 
-  function GetDrivingDirections( AOrigin, ADestination: String ): TSteps;
+  function GetDrivingDirections( AOrigin, ADestination: String ): TRoute;
   end;
 
 implementation

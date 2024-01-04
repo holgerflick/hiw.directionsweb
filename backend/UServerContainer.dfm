@@ -12,6 +12,7 @@ object ServerContainer: TServerContainer
     EntitySetPermissions = <>
     SwaggerOptions.Enabled = True
     SwaggerUIOptions.Enabled = True
+    SwaggerUIOptions.DisplayOperationId = True
     Left = 216
     Top = 16
   end

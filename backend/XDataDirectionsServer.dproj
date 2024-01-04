@@ -108,6 +108,7 @@
         </DCCReference>
         <DCCReference Include="services\UDirectionsService.pas"/>
         <DCCReference Include="services\UDirectionsServiceImpl.pas"/>
+        <DCCReference Include="services\UDirectionsTypes.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
