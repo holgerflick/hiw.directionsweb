@@ -6,7 +6,9 @@ uses
   UFrmMain in 'UFrmMain.pas' {FrmMain},
   UDirectionsService in 'services\UDirectionsService.pas',
   UDirectionsServiceImpl in 'services\UDirectionsServiceImpl.pas',
-  UDirectionsTypes in 'services\UDirectionsTypes.pas';
+  UDirectionsTypes in 'services\UDirectionsTypes.pas',
+  UDirectionsManager in 'services\UDirectionsManager.pas',
+  UApiKeys in 'UApiKeys.pas';
 
 {$R *.res}
 

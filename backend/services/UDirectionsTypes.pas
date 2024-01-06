@@ -64,6 +64,8 @@ type
     property TotalDistance: Integer read GetTotalDistance;
 
     property Steps: TSteps read FSteps;
+
+    procedure AddStep( AStep: TStep );
   end;
 
 
@@ -102,6 +104,11 @@ begin
 end;
 
 { TRoute }
+
+procedure TRoute.AddStep(AStep: TStep);
+begin
+  Steps.Add(AStep);
+end;
 
 constructor TRoute.Create;
 begin

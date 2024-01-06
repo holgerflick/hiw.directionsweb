@@ -16,14 +16,26 @@ type
 
 implementation
 
+uses
+  UDirectionsManager
+  ;
+
 
 { TDirectionsService }
 
 function TDirectionsService.GetDrivingDirections(
   AOrigin,
   ADestination: String): TRoute;
+var
+  LManager: TDirectionsManager;
+
 begin
-  Result := TRoute.Create;
+  LManager := TDirectionsManager.Create;
+  try
+    Result := LManager.GetDrivingDirections(AOrigin, ADestination);
+  finally
+    LManager.Free;
+  end;
 end;
 
 initialization

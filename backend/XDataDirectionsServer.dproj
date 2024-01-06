@@ -109,6 +109,8 @@
         <DCCReference Include="services\UDirectionsService.pas"/>
         <DCCReference Include="services\UDirectionsServiceImpl.pas"/>
         <DCCReference Include="services\UDirectionsTypes.pas"/>
+        <DCCReference Include="services\UDirectionsManager.pas"/>
+        <DCCReference Include="UApiKeys.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
