@@ -2,7 +2,6 @@ object ServerContainer: TServerContainer
   Height = 135
   Width = 358
   object Dispatcher: TSparkleHttpSysDispatcher
-    Active = True
     Left = 72
     Top = 16
   end
