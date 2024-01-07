@@ -37,6 +37,8 @@ uses
     System.TimeSpan
   , System.SysUtils
   , System.Threading
+
+  , XData.Sys.Exceptions
   ;
 
 
@@ -64,7 +66,8 @@ function TDirectionsManager.GetDrivingDirections(AOrigin,
 var
   LGuid: TGuid;
   LId: String;
-  LTask: ITask;
+  LTaskWait: IFuture<TRoute>;
+  LTaskRetrieve: ITask;
   LTimes: Integer;
 
 begin
@@ -73,7 +76,7 @@ begin
   CreateGUID(LGuid);
   LId := GUIDToString(LGuid);
 
-  LTask := TTask.Create(
+  LTaskRetrieve := TTask.Create(
     procedure
     begin
       FDirections.GetDirections( AOrigin, ADestination,
@@ -106,25 +109,41 @@ begin
     end
   );
 
-  LTask.Start;
+  LTaskRetrieve.Start;
 
-  LTimes := 0;
+  LTaskWait := TTask.Future<TRoute>(
+    function: TRoute
+    begin
+      LTimes := 0;
 
-  while (Result=nil) AND (LTimes < 20) do
-  begin
-    Sleep(500);
+      var LRoute := nil;
 
-    TMonitor.Enter(FRoutes);
-    try
-      if FRoutes.ContainsKey(LId) then
+      while (LRoute = nil) AND (LTimes < 20) do
       begin
-        Result := FRoutes[LId];
-      end;
-    finally
-      TMonitor.Exit(FRoutes);
-    end;
+        Sleep(500);
 
-    Inc(LTimes);
+        TMonitor.Enter(FRoutes);
+        try
+          if FRoutes.ContainsKey(LId) then
+          begin
+            LRoute := FRoutes[LId];
+          end;
+        finally
+          TMonitor.Exit(FRoutes);
+        end;
+
+        Inc(LTimes);
+      end;
+
+      Result := LRoute;
+    end
+  );
+
+  Result := LTaskWait.Value;
+
+  if Result = nil then
+  begin
+    raise EXDataHttpException.Create(404, 'No route found.');
   end;
 end;
 
