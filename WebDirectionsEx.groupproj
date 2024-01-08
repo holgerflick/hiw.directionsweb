@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{A60A0561-27CD-4C87-A43F-57FF2105C018}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="backend\XDataDirectionsServer.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="web\GetDirectionsEx.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="XDataDirectionsServer">
+        <MSBuild Projects="backend\XDataDirectionsServer.dproj"/>
+    </Target>
+    <Target Name="XDataDirectionsServer:Clean">
+        <MSBuild Projects="backend\XDataDirectionsServer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="XDataDirectionsServer:Make">
+        <MSBuild Projects="backend\XDataDirectionsServer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="GetDirectionsEx">
+        <MSBuild Projects="web\GetDirectionsEx.dproj"/>
+    </Target>
+    <Target Name="GetDirectionsEx:Clean">
+        <MSBuild Projects="web\GetDirectionsEx.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="GetDirectionsEx:Make">
+        <MSBuild Projects="web\GetDirectionsEx.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="XDataDirectionsServer;GetDirectionsEx"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="XDataDirectionsServer:Clean;GetDirectionsEx:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="XDataDirectionsServer:Make;GetDirectionsEx:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
