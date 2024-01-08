@@ -110,6 +110,7 @@
             <FormType>dfm</FormType>
             <DesignClass>TWebForm</DesignClass>
         </DCCReference>
+        <DCCReference Include="UServiceTypes.pas"/>
         <None Include="index.html"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>

@@ -6,7 +6,7 @@ object ServerContainer: TServerContainer
     Top = 16
   end
   object Server: TXDataServer
-    BaseUrl = 'http://+:2001/directions'
+    BaseUrl = 'http://+:2001/'
     Dispatcher = Dispatcher
     EntitySetPermissions = <>
     SwaggerOptions.Enabled = True
