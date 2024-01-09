@@ -1,9 +1,10 @@
 object FrmDirections: TFrmDirections
   Width = 873
-  Height = 620
+  Height = 588
   Caption = 'Get directions'
   CSSLibrary = cssBootstrap
   ElementFont = efCSS
+  OnCreate = WebFormCreate
   object divMap: TWebHTMLDiv
     Left = 8
     Top = 104
@@ -15,7 +16,7 @@ object FrmDirections: TFrmDirections
     ElementPosition = epIgnore
     ElementFont = efCSS
     Role = ''
-    object Maps: TTMSFNCLeaflet
+    object Map: TTMSFNCMaps
       Left = 0
       Top = 0
       Width = 857
@@ -29,20 +30,13 @@ object FrmDirections: TFrmDirections
       Circles = <>
       Rectangles = <>
       Markers = <>
-      Options.DefaultLatitude = 40.689247000000000000
-      Options.DefaultLongitude = -74.044501999999990000
-      Options.DefaultZoomLevel = 12.000000000000000000
-      Options.AttributionPrefix = '<a href='#39'https://www.leafletjs.com'#39' target='#39'_blank'#39'>Leaflet</a>'
-      Options.AttributionText = 
-        '&copy; <a href='#39'https://www.openstreetmap.org/copyright'#39' target=' +
-        #39'_blank'#39'>OpenStreetMap</a>'
-      LocalFileAccess = True
-      TileLayers = <>
       ElementContainers = <>
+      Labels = <>
       HeadLinks = <>
-      DesigntimeEnabled = False
-      ExplicitLeft = 280
-      ExplicitTop = 152
+      Options.DefaultZoomLevel = 12.000000000000000000
+      Service = msLeaflet
+      ExplicitLeft = 120
+      ExplicitTop = 56
       ExplicitWidth = 500
       ExplicitHeight = 350
     end
@@ -72,5 +66,18 @@ object FrmDirections: TFrmDirections
     HeightStyle = ssAuto
     HeightPercent = 100.000000000000000000
     WidthPercent = 100.000000000000000000
+  end
+  object btnGetDirections: TWebButton
+    Left = 216
+    Top = 24
+    Width = 96
+    Height = 25
+    ChildOrder = 3
+    ElementID = 'btnGetDirections'
+    ElementFont = efCSS
+    HeightStyle = ssAuto
+    HeightPercent = 100.000000000000000000
+    WidthPercent = 100.000000000000000000
+    OnClick = btnGetDirectionsClick
   end
 end

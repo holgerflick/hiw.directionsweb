@@ -3,7 +3,8 @@ unit UServiceTypes;
 interface
 
 uses
-  System.Generics.Collections
+    WEBLib.TMSFNCMapsCommonTypes
+  , System.Generics.Collections
   ;
 
 type
@@ -11,7 +12,10 @@ type
   private
     FLatitude: Double;
     FLongitude: Double;
+    function GetCoordinateRec: TTMSFNCMapsCoordinateRec;
   public
+    property CoordinateRec: TTMSFNCMapsCoordinateRec read GetCoordinateRec;
+
     property Latitude: Double read FLatitude write FLatitude;
     property Longitude: Double read FLongitude write FLongitude;
   end;
@@ -24,6 +28,7 @@ type
     FDuration: Integer;
     FInstructions: String;
     FCoordinates: TCoordinates;
+    function GetCoordinateRecArray: TTMSFNCMapsCoordinateRecArray;
 
   public
     constructor Create;
@@ -31,6 +36,8 @@ type
 
     property Coordinates: TCoordinates
       read FCoordinates write FCoordinates;
+
+    property CoordinateRecArray: TTMSFNCMapsCoordinateRecArray read GetCoordinateRecArray;
 
     property Distance: Integer
       read FDistance write FDistance;
@@ -46,8 +53,10 @@ type
   TRoute = class
   private
     FSteps: TSteps;
-    FTotalDistance: Integer;
-    FTotalDuration: Integer;
+    function GetTotalDistance: Integer;
+    function GetTotalDuration: Integer;
+    function GetCoordinateDestination: TCoordinate;
+    function GetCoordinateOrigin: TCoordinate;
 
   public
     constructor Create;
@@ -55,8 +64,11 @@ type
 
     property Steps: TSteps read FSteps;
 
-    property TotalDuration: Integer read FTotalDuration write FTotalDuration;
-    property TotalDistance: Integer read FTotalDistance write FTotalDistance;
+    property TotalDuration: Integer read GetTotalDuration;
+    property TotalDistance: Integer read GetTotalDistance;
+
+    property CoordinateOrigin: TCoordinate read GetCoordinateOrigin;
+    property CoordinateDestination: TCoordinate read GetCoordinateDestination;
   end;
 
 
@@ -78,6 +90,39 @@ begin
   inherited;
 end;
 
+function TRoute.GetCoordinateDestination: TCoordinate;
+begin
+  Result := Steps.Last.Coordinates.Last;
+end;
+
+function TRoute.GetCoordinateOrigin: TCoordinate;
+begin
+  Result := Steps.First.Coordinates.First;
+end;
+
+function TRoute.GetTotalDistance: Integer;
+var
+  LStep: TStep;
+begin
+  Result := 0;
+  for LStep in Steps do
+  begin
+    Result := Result + LStep.Distance;
+  end;
+end;
+
+function TRoute.GetTotalDuration: Integer;
+var
+  LStep: TStep;
+
+begin
+  Result := 0;
+  for LStep in Steps do
+  begin
+    Result := Result + LStep.Duration;
+  end;
+end;
+
 { TStep }
 
 constructor TStep.Create;
@@ -92,6 +137,28 @@ begin
   FCoordinates.Free;
 
   inherited;
+end;
+
+function TStep.GetCoordinateRecArray: TTMSFNCMapsCoordinateRecArray;
+var
+  LCoordinate: TCoordinate;
+  LIndex : Integer;
+begin
+  SetLength( Result, Coordinates.Count );
+
+  LIndex := 0;
+  for LCoordinate in Coordinates do
+  begin
+    Result[LIndex] := CreateCoordinate( LCoordinate.Latitude, LCoordinate.Longitude );
+    Inc( LIndex );
+  end;
+end;
+
+{ TCoordinate }
+
+function TCoordinate.GetCoordinateRec: TTMSFNCMapsCoordinateRec;
+begin
+  Result := CreateCoordinate( Latitude, Longitude );
 end;
 
 end.

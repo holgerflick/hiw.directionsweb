@@ -11,7 +11,7 @@ uses
 type
   [ServiceImplementation]
   TDirectionsService = class(TInterfacedObject, IDirectionsService)
-    function GetDrivingDirections( AOrigin, ADestination: String ): TRoute;
+    function DrivingDirections( Origin, Destination: String ): TRoute;
   end;
 
 implementation
@@ -23,16 +23,16 @@ uses
 
 { TDirectionsService }
 
-function TDirectionsService.GetDrivingDirections(
-  AOrigin,
-  ADestination: String): TRoute;
+function TDirectionsService.DrivingDirections(
+  Origin,
+  Destination: String): TRoute;
 var
   LManager: TDirectionsManager;
 
 begin
   LManager := TDirectionsManager.Create;
   try
-    Result := LManager.GetDrivingDirections(AOrigin, ADestination);
+    Result := LManager.GetDrivingDirections(Origin, Destination);
   finally
     LManager.Free;
   end;

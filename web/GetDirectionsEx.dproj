@@ -111,6 +111,11 @@
             <DesignClass>TWebForm</DesignClass>
         </DCCReference>
         <DCCReference Include="UServiceTypes.pas"/>
+        <DCCReference Include="UServiceManager.pas">
+            <Form>ServiceManager</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TWebDataModule</DesignClass>
+        </DCCReference>
         <None Include="index.html"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
@@ -134,12 +139,6 @@
                 </Source>
             </Delphi.Personality>
             <Deployment Version="4">
-                <DeployFile LocalName="C:\dev\directionsweb\web\index.html" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="Win32\Debug\GetDirectionsEx.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>GetDirectionsEx.exe</RemoteName>

@@ -14,5 +14,11 @@ object ServerContainer: TServerContainer
     SwaggerUIOptions.DisplayOperationId = True
     Left = 216
     Top = 16
+    object ServerCORS: TSparkleCorsMiddleware
+    end
+    object ServerForward: TSparkleForwardMiddleware
+      OnAcceptProxy = ServerForwardAcceptProxy
+      OnAcceptHost = ServerForwardAcceptHost
+    end
   end
 end

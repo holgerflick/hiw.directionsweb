@@ -4,7 +4,8 @@ uses
   Vcl.Forms,
   WEBLib.Forms,
   UFrmDirections in 'UFrmDirections.pas' {FrmDirections: TWebForm} {*.html},
-  UServiceTypes in 'UServiceTypes.pas';
+  UServiceTypes in 'UServiceTypes.pas',
+  UServiceManager in 'UServiceManager.pas' {ServiceManager: TWebDataModule};
 
 {$R *.res}
 
