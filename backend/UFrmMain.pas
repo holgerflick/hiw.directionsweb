@@ -20,7 +20,6 @@ type
     procedure actStopServerExecute(Sender: TObject);
     procedure actSwaggerUIExecute(Sender: TObject);
     procedure actSwaggerUIUpdate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
     FServerContainer: TServerContainer;
@@ -69,11 +68,6 @@ begin
   actSwaggerUI.Enabled := Server.Active;
 end;
 
-procedure TFrmMain.FormDestroy(Sender: TObject);
-begin
-  FServerContainer.Free;
-end;
-
 procedure TFrmMain.ToggleServer(AActive: Boolean);
 begin
   Server.Active := AActive;
@@ -94,7 +88,7 @@ end;
 
 procedure TFrmMain.FormCreate(Sender: TObject);
 begin
-  FServerContainer := TServerContainer.Create(nil);
+  FServerContainer := TServerContainer.Create(Self);
 
   UpdateInterface;
 end;

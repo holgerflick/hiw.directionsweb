@@ -11,11 +11,18 @@ type
 
 implementation
 
+uses
+  System.IOUtils
+  ;
+
 { TApiKeys }
 
 class function TApiKeys.Google: String;
 begin
-  Result := 'AIzaSyAIL0abIiThGNcEPCeaZzX76QeN_VrjTqE';
+  Result := TFile.ReadAllText(
+    TPath.Combine( TPath.GetAppPath,
+    'apikey.txt' )
+  );
 end;
 
 end.

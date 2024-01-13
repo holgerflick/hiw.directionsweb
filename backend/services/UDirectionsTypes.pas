@@ -30,7 +30,6 @@ type
     FInstructions: String;
     FCoordinates: TCoordinates;
 
-
   public
     constructor Create;
     destructor Destroy; override;

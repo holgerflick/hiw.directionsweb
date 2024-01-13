@@ -216,8 +216,8 @@ procedure TFrmDirections.WebFormCreate(Sender: TObject);
 begin
   FServiceManager := TServiceManager.Create(Self);
 
-  txtOrigin.Text := '13609 Lesina Court, Estero, FL';
-  txtDestination.Text := 'Pennyroyal Dr, Bonita Springs, FL';
+  txtOrigin.Text := 'Barefoot Beach, Bonita Springs, FL';
+  txtDestination.Text := 'Dali Museum, Tampa, FL';
 end;
 
 end.

@@ -7,7 +7,8 @@ uses
   Sparkle.HttpServer.Context, Sparkle.Comp.Server,
   Sparkle.Comp.HttpSysDispatcher, Aurelius.Drivers.Interfaces,
   Aurelius.Comp.Connection, XData.Comp.ConnectionPool, XData.Server.Module,
-  XData.Comp.Server, Sparkle.Comp.ForwardMiddleware, Sparkle.Comp.CorsMiddleware;
+  XData.Comp.Server, Sparkle.Comp.ForwardMiddleware, Sparkle.Comp.CorsMiddleware,
+  Sparkle.Comp.CompressMiddleware;
 
 type
   TServerContainer = class(TDataModule)
@@ -15,6 +16,7 @@ type
     Server: TXDataServer;
     ServerCORS: TSparkleCorsMiddleware;
     ServerForward: TSparkleForwardMiddleware;
+    ServerCompress: TSparkleCompressMiddleware;
     procedure ServerForwardAcceptHost(Sender: TObject; const Value: string; var
         Accept: Boolean);
     procedure ServerForwardAcceptProxy(Sender: TObject; const Value: string; var

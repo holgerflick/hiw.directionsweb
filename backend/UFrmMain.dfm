@@ -12,7 +12,6 @@ object FrmMain: TFrmMain
   Font.Name = 'Segoe UI'
   Font.Style = []
   OnCreate = FormCreate
-  OnDestroy = FormDestroy
   DesignSize = (
     589
     395)
@@ -103,7 +102,7 @@ object FrmMain: TFrmMain
       '')
     MarkerList.UseDefaultMarkerImageIndex = False
     MarkerList.DefaultMarkerImageIndex = -1
-    MarkerList.ImageTransparentColor = -1
+    MarkerList.ImageTransparentColor = 33554432
     OleDropTarget = []
     PrintOptions.MarginLeft = 0
     PrintOptions.MarginRight = 0
@@ -154,7 +153,7 @@ object FrmMain: TFrmMain
   end
   object ActionList1: TActionList
     Left = 256
-    Top = 24
+    Top = 72
     object actStartServer: TAction
       Caption = '&Start'
       OnExecute = actStartServerExecute

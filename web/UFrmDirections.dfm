@@ -35,10 +35,6 @@ object FrmDirections: TFrmDirections
       HeadLinks = <>
       Options.DefaultZoomLevel = 12.000000000000000000
       Service = msLeaflet
-      ExplicitLeft = 120
-      ExplicitTop = 56
-      ExplicitWidth = 500
-      ExplicitHeight = 350
     end
   end
   object txtOrigin: TWebEdit

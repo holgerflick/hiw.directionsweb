@@ -20,5 +20,7 @@ object ServerContainer: TServerContainer
       OnAcceptProxy = ServerForwardAcceptProxy
       OnAcceptHost = ServerForwardAcceptHost
     end
+    object ServerCompress: TSparkleCompressMiddleware
+    end
   end
 end

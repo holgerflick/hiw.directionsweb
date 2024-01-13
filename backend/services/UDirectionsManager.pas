@@ -80,7 +80,8 @@ begin
     procedure
     begin
       FDirections.GetDirections( AOrigin, ADestination,
-        procedure(const ARequest: TTMSFNCDirectionsRequest; const ARequestResult: TTMSFNCCloudBaseRequestResult)
+        procedure(const ARequest: TTMSFNCDirectionsRequest;
+          const ARequestResult: TTMSFNCCloudBaseRequestResult)
         begin
           if ARequestResult.Success then
           begin
@@ -95,7 +96,6 @@ begin
                 LRoute.AddStep(LStep);
               end;
 
-              // TODO: monitor...
               TMonitor.Enter(FRoutes);
               try
                 FRoutes.Add( ARequest.Id, LRoute );
@@ -135,7 +135,7 @@ begin
         Inc(LTimes);
       end;
 
-      Result := LRoute;
+      Result := LRoute;  // can be nil if no route found
     end
   );
 
