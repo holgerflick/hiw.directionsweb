@@ -11,7 +11,6 @@ object FrmDirections: TFrmDirections
     Width = 857
     Height = 400
     ElementID = 'divMap'
-    HeightStyle = ssPercent
     WidthStyle = ssPercent
     ElementPosition = epIgnore
     ElementFont = efCSS
@@ -34,7 +33,7 @@ object FrmDirections: TFrmDirections
       Labels = <>
       HeadLinks = <>
       Options.DefaultZoomLevel = 12.000000000000000000
-      Service = msLeaflet
+      Service = msOpenLayers
     end
   end
   object txtOrigin: TWebEdit

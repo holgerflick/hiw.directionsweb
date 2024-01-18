@@ -69,6 +69,7 @@ type
 
     property CoordinateOrigin: TCoordinate read GetCoordinateOrigin;
     property CoordinateDestination: TCoordinate read GetCoordinateDestination;
+
   end;
 
 

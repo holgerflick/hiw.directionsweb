@@ -1,7 +1,7 @@
 object ServiceManager: TServiceManager
   OnCreate = WebDataModuleCreate
-  Height = 352
-  Width = 447
+  Height = 270
+  Width = 393
   object Client: TWebHttpRequest
     Command = httpPOST
     Headers.Strings = (
@@ -10,7 +10,7 @@ object ServiceManager: TServiceManager
     URL = 
       'https://beta1.flixengineering.com/DirectionsService/DrivingDirec' +
       'tions'
-    Left = 56
-    Top = 80
+    Left = 64
+    Top = 64
   end
 end

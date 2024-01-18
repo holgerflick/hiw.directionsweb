@@ -63,15 +63,11 @@ var
   LCoordinateObj: TJSObject;
   LCoordinate: TCoordinate;
 
-  LStream: TStringStream;
 
 begin
   FRoute.Free;
 
   FRoute := TRoute.Create;
-
-  LStream.Free;
-
 
   LRouteObj := TJSObject( AResponse );
 
@@ -108,6 +104,7 @@ var
   LPayload: TDrivingDirectionsPostData;
   LBodyString: String;
   LReq: TJSXMLHttpRequest;
+
 begin
   LPayload := TDrivingDirectionsPostData.Create( AOrigin, ADestination );
 
