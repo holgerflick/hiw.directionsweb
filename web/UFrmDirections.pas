@@ -107,14 +107,13 @@ begin
     take you %d minutes to drive there.
     ''', [ LRoute.TotalDistance, LRoute.TotalDuration DIV 60 ] );
 
-  *)
-
+   *)
 
   LHook.innerHTML := '';
 
   // add table
-  LTable := document.createHTMLElement('table');
-  LTable.className := 'table table-hover';
+  LTable := document.createHTMLElement('table');      // <table></table>
+  LTable.className := 'table table-hover';            // <table class="table table-hover"></table>
 
   // add header
 
@@ -140,71 +139,75 @@ begin
   LTBody := document.createHTMLElement('tbody');
 
   Map.BeginUpdate;
-  Map.Markers.Clear;
-  Map.Polylines.Clear;
+  try
+    Map.Markers.Clear;
+    Map.Polylines.Clear;
 
-  LStepNo := 1;
-  for LStep in LRoute.Steps do
-  begin
-    LTr := document.createHTMLElement('tr');
-
-    LPoly := Map.AddPolyline( LStep.CoordinateRecArray );
-    LPoly.StrokeColor := clRed;
-    LPoly.StrokeWidth := 5;
-    LPoly.StrokeOpacity := 0.6;
-
-    LIndex := 0;
-    for LColumn in LColumns do
+    LStepNo := 1;
+    for LStep in LRoute.Steps do
     begin
-      Inc(LIndex);
+      LTr := document.createHTMLElement('tr');
 
-      LTd := document.createHTMLElement('td');
+      LPoly := Map.AddPolyline( LStep.CoordinateRecArray );
+      LPoly.StrokeColor := clRed;
+      LPoly.StrokeWidth := 5;
+      LPoly.StrokeOpacity := 0.6;
 
-      if LIndex <> 4 then
+      LIndex := 0;
+      for LColumn in LColumns do
       begin
-        LTd.className := 'text-monospace text-right'
+        Inc(LIndex);
+
+        LTd := document.createHTMLElement('td');
+
+        if LIndex <> 4 then
+        begin
+          LTd.className := 'text-monospace text-right'
+        end;
+
+        if LIndex = 1 then      // #
+        begin
+          LTd.innerHTML := LStepNo.ToString;
+        end;
+
+        if LIndex = 2 then      // Distance
+        begin
+          LTd.innerHTML := Format( '%.1f', [LStep.Distance/1000] );
+        end;
+
+        if LIndex = 3 then      // Duration
+        begin
+          LTd.innerHTML := Format( '%.1f', [LStep.Duration/60] );
+        end;
+
+        if LIndex = 4 then
+        begin
+          LTd.classList.add('user-select-all');
+          LTd.innerHTML := LStep.Instructions;
+        end;
+
+        LTr.appendChild(LTd);
       end;
 
-      if LIndex = 1 then      // #
-      begin
-        LTd.innerHTML := LStepNo.ToString;
-      end;
+      LTBody.appendChild(LTr);
 
-      if LIndex = 2 then      // Distance
-      begin
-        LTd.innerHTML := Format( '%.1f', [LStep.Distance/1000] );
-      end;
-
-      if LIndex = 3 then      // Duration
-      begin
-        LTd.innerHTML := Format( '%.1f', [LStep.Duration/60] );
-      end;
-
-      if LIndex = 4 then
-      begin
-        LTd.classList.add('user-select-all');
-        LTd.innerHTML := LStep.Instructions;
-      end;
-
-      LTr.appendChild(LTd);
+      Inc(LStepNo);
     end;
 
-    LTBody.appendChild(LTr);
+    // finally, add the table to the document
+    // make this the last line, otherwise performance will be worse
+    LTable.appendChild(LTHead);
+    LTable.appendChild(LTBody);
+    LHook.appendChild(LTable);
 
-    Inc(LStepNo);
+    Map.AddMarker(LRoute.CoordinateOrigin.CoordinateRec);
+    Map.AddMarker(LRoute.CoordinateDestination.CoordinateRec);
+
+    Map.ZoomToBounds(Map.Markers.ToCoordinateArray);
+  finally
+    Map.EndUpdate;
   end;
 
-  Map.AddMarker(LRoute.CoordinateOrigin.CoordinateRec);
-  Map.AddMarker(LRoute.CoordinateDestination.CoordinateRec);
-
-  Map.ZoomToBounds(Map.Markers.ToCoordinateArray);
-  Map.EndUpdate;
-
-  // finally, add the table to the document
-  // make this the last line, otherwise performance will be worse
-  LTable.appendChild(LTHead);
-  LTable.appendChild(LTBody);
-  LHook.appendChild(LTable);
 end;
 
 procedure TFrmDirections.btnGetDirectionsClick(Sender: TObject);
