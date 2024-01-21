@@ -4,20 +4,19 @@ interface
 
 uses
   System.SysUtils, System.Classes, JS, Web, WEBLib.Graphics, WEBLib.Controls,
-  WEBLib.Forms, WEBLib.Dialogs, VCL.TMSFNCTypes, Vcl.StdCtrls, WEBLib.StdCtrls,
-  Vcl.Controls, WEBLib.WebCtrls, VCL.TMSFNCUtils, VCL.TMSFNCGraphics,
-  VCL.TMSFNCGraphicsTypes, VCL.TMSFNCMapsCommonTypes, VCL.TMSFNCCustomControl,
-  VCL.TMSFNCWebBrowser, VCL.TMSFNCMaps,
+  WEBLib.Forms, WEBLib.Dialogs, Vcl.StdCtrls, WEBLib.StdCtrls,
+  Vcl.Controls, WEBLib.WebCtrls,
+ 
   UServiceManager
   ;
 
 type
   TFrmDirections = class(TWebForm)
-    divMap: TWebHTMLDiv;
     txtOrigin: TWebEdit;
     txtDestination: TWebEdit;
-    Map: TTMSFNCMaps;
     btnGetDirections: TWebButton;
+    divMap: TWebHTMLDiv;
+    Map: TWebLeafletMaps;
     procedure btnGetDirectionsClick(Sender: TObject);
     procedure WebFormCreate(Sender: TObject);
   strict private
@@ -89,7 +88,7 @@ var
   LStepNo: Integer;
   LIndex: Integer;
 
-  LPoly: TTMSFNCMapsPolyline;
+  // LPoly: TTMSFNCMapsPolyline;
 
 begin
   LRoute := FServiceManager.Route;
@@ -140,18 +139,18 @@ begin
 
   Map.BeginUpdate;
   try
-    Map.Markers.Clear;
-    Map.Polylines.Clear;
+    Map.ClearMarkers;
+    Map.ClearPolylines;
 
     LStepNo := 1;
     for LStep in LRoute.Steps do
     begin
       LTr := document.createHTMLElement('tr');
 
-      LPoly := Map.AddPolyline( LStep.CoordinateRecArray );
-      LPoly.StrokeColor := clRed;
-      LPoly.StrokeWidth := 5;
-      LPoly.StrokeOpacity := 0.6;
+//      LPoly := Map.AddPolyline( LStep.CoordinateRecArray );
+//      LPoly.StrokeColor := clRed;
+//      LPoly.StrokeWidth := 5;
+//      LPoly.StrokeOpacity := 0.6;
 
       LIndex := 0;
       for LColumn in LColumns do
@@ -200,10 +199,20 @@ begin
     LTable.appendChild(LTBody);
     LHook.appendChild(LTable);
 
-    Map.AddMarker(LRoute.CoordinateOrigin.CoordinateRec);
-    Map.AddMarker(LRoute.CoordinateDestination.CoordinateRec);
+    Map.AddMarker(
+      LRoute.CoordinateOrigin.Latitude,
+      LRoute.CoordinateOrigin.Longitude
+      );
 
-    Map.ZoomToBounds(Map.Markers.ToCoordinateArray);
+    Map.AddMarker(
+      LRoute.CoordinateDestination.Latitude,
+      LRoute.CoordinateDestination.Longitude
+      );
+
+
+    Map.SetZoom(11);
+
+//    Map.ZoomToBounds(Map.Markers.ToCoordinateArray);
   finally
     Map.EndUpdate;
   end;

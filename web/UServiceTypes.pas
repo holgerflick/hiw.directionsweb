@@ -3,8 +3,7 @@ unit UServiceTypes;
 interface
 
 uses
-    WEBLib.TMSFNCMapsCommonTypes
-  , System.Generics.Collections
+  System.Generics.Collections
   ;
 
 type
@@ -12,9 +11,7 @@ type
   private
     FLatitude: Double;
     FLongitude: Double;
-    function GetCoordinateRec: TTMSFNCMapsCoordinateRec;
   public
-    property CoordinateRec: TTMSFNCMapsCoordinateRec read GetCoordinateRec;
 
     property Latitude: Double read FLatitude write FLatitude;
     property Longitude: Double read FLongitude write FLongitude;
@@ -28,7 +25,6 @@ type
     FDuration: Integer;
     FInstructions: String;
     FCoordinates: TCoordinates;
-    function GetCoordinateRecArray: TTMSFNCMapsCoordinateRecArray;
 
   public
     constructor Create;
@@ -37,7 +33,6 @@ type
     property Coordinates: TCoordinates
       read FCoordinates write FCoordinates;
 
-    property CoordinateRecArray: TTMSFNCMapsCoordinateRecArray read GetCoordinateRecArray;
 
     property Distance: Integer
       read FDistance write FDistance;
@@ -140,26 +135,5 @@ begin
   inherited;
 end;
 
-function TStep.GetCoordinateRecArray: TTMSFNCMapsCoordinateRecArray;
-var
-  LCoordinate: TCoordinate;
-  LIndex : Integer;
-begin
-  SetLength( Result, Coordinates.Count );
-
-  LIndex := 0;
-  for LCoordinate in Coordinates do
-  begin
-    Result[LIndex] := CreateCoordinate( LCoordinate.Latitude, LCoordinate.Longitude );
-    Inc( LIndex );
-  end;
-end;
-
-{ TCoordinate }
-
-function TCoordinate.GetCoordinateRec: TTMSFNCMapsCoordinateRec;
-begin
-  Result := CreateCoordinate( Latitude, Longitude );
-end;
 
 end.

@@ -5,37 +5,6 @@ object FrmDirections: TFrmDirections
   CSSLibrary = cssBootstrap
   ElementFont = efCSS
   OnCreate = WebFormCreate
-  object divMap: TWebHTMLDiv
-    Left = 8
-    Top = 104
-    Width = 857
-    Height = 400
-    ElementID = 'divMap'
-    WidthStyle = ssPercent
-    ElementPosition = epIgnore
-    ElementFont = efCSS
-    Role = ''
-    object Map: TTMSFNCMaps
-      Left = 0
-      Top = 0
-      Width = 857
-      Height = 400
-      Align = alClient
-      ParentDoubleBuffered = False
-      DoubleBuffered = True
-      TabOrder = 0
-      Polylines = <>
-      Polygons = <>
-      Circles = <>
-      Rectangles = <>
-      Markers = <>
-      ElementContainers = <>
-      Labels = <>
-      HeadLinks = <>
-      Options.DefaultZoomLevel = 12.000000000000000000
-      Service = msOpenLayers
-    end
-  end
   object txtOrigin: TWebEdit
     Left = 24
     Top = 8
@@ -74,5 +43,28 @@ object FrmDirections: TFrmDirections
     HeightPercent = 100.000000000000000000
     WidthPercent = 100.000000000000000000
     OnClick = btnGetDirectionsClick
+  end
+  object divMap: TWebHTMLDiv
+    Left = 24
+    Top = 112
+    Width = 841
+    Height = 433
+    ElementID = 'divMap'
+    ChildOrder = 3
+    ElementPosition = epIgnore
+    ElementFont = efCSS
+    Role = ''
+    object Map: TWebLeafletMaps
+      Left = 0
+      Top = 0
+      Width = 841
+      Height = 433
+      WidthStyle = ssPercent
+      Align = alClient
+      ElementPosition = epIgnore
+      Options.DefaultLatitude = -34.397000000000000000
+      Options.DefaultLongitude = 150.644000000000000000
+      ExplicitHeight = 400
+    end
   end
 end
