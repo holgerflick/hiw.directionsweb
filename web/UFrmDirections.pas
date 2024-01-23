@@ -15,7 +15,6 @@ type
     txtOrigin: TWebEdit;
     txtDestination: TWebEdit;
     btnGetDirections: TWebButton;
-    divMap: TWebHTMLDiv;
     Map: TWebLeafletMaps;
     procedure btnGetDirectionsClick(Sender: TObject);
     procedure WebFormCreate(Sender: TObject);
@@ -209,6 +208,8 @@ begin
       LRoute.CoordinateDestination.Longitude
       );
 
+    Map.SetCenter( LRoute.CoordinateOrigin.Latitude,
+      LRoute.CoordinateOrigin.Longitude );
 
     Map.SetZoom(11);
 

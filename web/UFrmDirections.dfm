@@ -44,27 +44,16 @@ object FrmDirections: TFrmDirections
     WidthPercent = 100.000000000000000000
     OnClick = btnGetDirectionsClick
   end
-  object divMap: TWebHTMLDiv
+  object Map: TWebLeafletMaps
     Left = 24
-    Top = 112
+    Top = 104
     Width = 841
-    Height = 433
+    Height = 400
     ElementID = 'divMap'
+    WidthStyle = ssAuto
     ChildOrder = 3
     ElementPosition = epIgnore
-    ElementFont = efCSS
-    Role = ''
-    object Map: TWebLeafletMaps
-      Left = 0
-      Top = 0
-      Width = 841
-      Height = 433
-      WidthStyle = ssPercent
-      Align = alClient
-      ElementPosition = epIgnore
-      Options.DefaultLatitude = -34.397000000000000000
-      Options.DefaultLongitude = 150.644000000000000000
-      ExplicitHeight = 400
-    end
+    Options.DefaultLatitude = -34.397000000000000000
+    Options.DefaultLongitude = 150.644000000000000000
   end
 end
