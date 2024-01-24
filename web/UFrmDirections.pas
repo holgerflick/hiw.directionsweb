@@ -146,6 +146,8 @@ begin
     begin
       LTr := document.createHTMLElement('tr');
 
+      Map.AddPolyLine( LStep.CoordinateArray, clRed, 5, 0.6 );
+
 //      LPoly := Map.AddPolyline( LStep.CoordinateRecArray );
 //      LPoly.StrokeColor := clRed;
 //      LPoly.StrokeWidth := 5;

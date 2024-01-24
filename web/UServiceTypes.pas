@@ -3,7 +3,8 @@ unit UServiceTypes;
 interface
 
 uses
-  System.Generics.Collections
+  JS
+  , System.Generics.Collections
   ;
 
 type
@@ -11,7 +12,10 @@ type
   private
     FLatitude: Double;
     FLongitude: Double;
+    function GetJSArray: TJSArray;
   public
+
+    property ToJSArray: TJSArray read GetJSArray;
 
     property Latitude: Double read FLatitude write FLatitude;
     property Longitude: Double read FLongitude write FLongitude;
@@ -25,6 +29,7 @@ type
     FDuration: Integer;
     FInstructions: String;
     FCoordinates: TCoordinates;
+    function GetCoordinateArray: TJSArray;
 
   public
     constructor Create;
@@ -33,6 +38,8 @@ type
     property Coordinates: TCoordinates
       read FCoordinates write FCoordinates;
 
+
+    property CoordinateArray: TJSArray read GetCoordinateArray;
 
     property Distance: Integer
       read FDistance write FDistance;
@@ -135,5 +142,32 @@ begin
   inherited;
 end;
 
+
+function TStep.GetCoordinateArray: TJSArray;
+var
+  LCoordinate: TCoordinate;
+
+begin
+  Result := TJSArray.new;
+
+  for LCoordinate in self.Coordinates do
+  begin
+    Result.push(LCoordinate.ToJSArray);
+  end;
+end;
+
+{ TCoordinate }
+
+function TCoordinate.GetJSArray: TJSArray;
+var
+  LCoordinate: array of Double;
+
+begin
+  SetLength(LCoordinate, 2);
+  LCoordinate[0] := self.Latitude;
+  LCoordinate[1] := self.Longitude;
+
+  Result := JS.toArray( LCoordinate );
+end;
 
 end.
